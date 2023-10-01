@@ -14,7 +14,8 @@
        <br>
    </form>
 
-   <a href="/registration"> <h2> Registration </h2> </a>
+   <a href="/registration_client"> <h2> Registration client </h2> </a>
+   <a href="/registration_distributor"> <h2> Registration distributor </h2> </a>
 
 </body>
 </html>

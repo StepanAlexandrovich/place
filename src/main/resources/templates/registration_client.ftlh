@@ -7,21 +7,21 @@
     <title>Registration</title>
 </head>
 <body>
-<#if userDto?? && noErrors??>
-Login : ${userDto.login}
+<#if userCreateDto?? && noErrors??>
+Login : ${userCreateDto.login}
 <br>
-Password : ${userDto.password}
+Password : ${userCreateDto.password}
 <br>
 <#else>
-<form action="/registration" method="post" >
+<form action="/registration_client" method="post" >
 
     Login
-    <@spring.formInput "userDto.login" />
+    <@spring.formInput "userCreateDto.login" />
     <@spring.showErrors "<br>" />
 
     <br>
     Password
-    <@spring.formInput "userDto.password" />
+    <@spring.formInput "userCreateDto.password" />
     <@spring.showErrors "<br>" />
 
     <br>
