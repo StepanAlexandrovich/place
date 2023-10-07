@@ -28,13 +28,18 @@ public class ProductSubCategoryServiceImpl implements ProductSubCategoryService 
 
     @Override
     public void createProductSubCategory(String name, Long productCategoryId) {
-        ProductCategory productCategory = productCategoryRepository.findById(productCategoryId).get();
+        ProductCategory productCategory = productCategoryRepository.findById(productCategoryId).orElse(new ProductCategory());
 
         ProductSubCategory productSubCategory = new ProductSubCategory();
         productSubCategory.setName(name);
         productSubCategory.setProductCategory(productCategory);
 
         productSubCategoryRepository.save(productSubCategory);
+    }
+
+    @Override
+    public ProductSubCategory getById(Long productCategoryId) {
+        return productSubCategoryRepository.findById(productCategoryId).orElse(new ProductSubCategory());
     }
 
 

@@ -19,10 +19,10 @@
     </thead>
 
     <tbody>
-       <#list productSubCategories as subcategory>
+       <#list productSubCategories as subCategory>
            <tr>
-               <th>${subcategory.name}</th>
-               <th><a href="/product/${subcategory.id}"> Посмотреть список товаров </a></th>
+               <th>${subCategory.name}</th>
+               <th><a href="/products/${subCategory.id}"> Посмотреть список товаров </a></th>
            </tr>
        </#list>
     </tbody>

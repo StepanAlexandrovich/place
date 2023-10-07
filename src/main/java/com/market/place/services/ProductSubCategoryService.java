@@ -9,4 +9,7 @@ public interface ProductSubCategoryService {
     List<ProductSubCategory> getAllByProductCategoryId(Long id);
 
     void createProductSubCategory(String name,Long productCategoryId);
+
+    ProductSubCategory getById(Long productCategoryId);
+
 }
