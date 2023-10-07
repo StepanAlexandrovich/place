@@ -26,4 +26,6 @@ public class Product {
     private ProductSubCategory productSubCategory;
     @OneToMany(mappedBy = "product")
     private List<Price> prices = new ArrayList<>();
+    @OneToMany(mappedBy = "product")
+    private List<Quantity> quantities = new ArrayList<>();
 }
