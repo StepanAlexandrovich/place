@@ -3,10 +3,33 @@
 <head>
 
     <title>Product category</title>
-</head>
-<style>
+<!--    <link rel="stylesheet" href="/static/css/style.css">-->
 
-</style>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+<!--<style>-->
+<!--    table {-->
+<!--    font-family: sans-serif;-->
+<!--    text-align: left;-->
+<!--    border-collapse: separate;-->
+<!--    border-spacing: 5px;-->
+<!--    background: #ece9e0;-->
+<!--    color: #656655;-->
+<!--    border: 16px solid #ece9e0;-->
+<!--    border-radius: 20px;-->
+<!--}-->
+
+<!--thead{-->
+<!--    font-size: 18px;-->
+<!--    padding: 10px;-->
+<!--}-->
+
+<!--tbody{-->
+<!--    background: #f5d7bf;-->
+<!--    padding: 10px;-->
+<!--}-->
+<!--</style>-->
 
 <body>
 <h2> Product category </h2>

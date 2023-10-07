@@ -2,6 +2,7 @@ package com.market.place.controllers;
 
 import com.market.place.models.ProductCategory;
 import com.market.place.models.ProductSubCategory;
+import com.market.place.services.impl.ProductCategoryServiceImpl;
 import com.market.place.services.impl.ProductSubCategoryServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductSubCategoryController {
     private final ProductSubCategoryServiceImpl productSubCategoryService;
+    private final ProductCategoryServiceImpl productCategoryService;
 
     @GetMapping("/")
     public String getAllSubCategory(Model model, Principal principal){
@@ -35,13 +37,19 @@ public class ProductSubCategoryController {
         return "products/productSubCategory";
     }
 
-    @GetMapping(value = "/{productSubCategoryId}")
-    public String getAllSubCategories(@PathVariable String productSubCategoryId,Model model, Principal principal){
+    @GetMapping(value = "/{productCategoryId}")
+    public String getAllSubCategories(@PathVariable String productCategoryId,Model model, Principal principal){
         String role = ((UsernamePasswordAuthenticationToken) principal).getAuthorities().stream().toList().get(0).getAuthority();
 
-        List<ProductSubCategory> productSubCategories = productSubCategoryService.getAllByProductCategoryId(Long.parseLong(productSubCategoryId));
+        ProductCategory productCategory = productCategoryService.getById(Long.parseLong(productCategoryId));
+
+        List<ProductSubCategory> productSubCategories = productSubCategoryService.getAllByProductCategoryId(Long.parseLong(productCategoryId));
         model.addAttribute("productSubCategories",productSubCategories);
+        model.addAttribute("productCategory",productCategory);// временнрр
+
         model.addAttribute("userRole",role);
+
+
         return "products/productSubCategory";
     }
 

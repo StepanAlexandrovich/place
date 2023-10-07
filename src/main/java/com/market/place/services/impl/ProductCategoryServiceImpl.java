@@ -13,9 +13,15 @@ import java.util.List;
 public class ProductCategoryServiceImpl implements ProductCategoryService {
     private final ProductCategoryRepository productCategoryRepository;
 
+
     @Override
     public List<ProductCategory> getAll() {
         return productCategoryRepository.findAll();
+    }
+
+    @Override
+    public ProductCategory getById(Long id) {
+        return productCategoryRepository.findById(id).orElse(new ProductCategory());
     }
 
     @Override

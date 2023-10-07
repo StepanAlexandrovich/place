@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductSubCategoryRepository extends JpaRepository<ProductSubCategory,Long> {
-    @Query(value = "SELECT * FROM public.product_sub_category where product_category_id = :productCategoryIdOut",nativeQuery = true)
-    List<ProductSubCategory> findAllByProductCategoryId(Long productCategoryIdOut); // как писать название переменной
+    @Query(value = "SELECT * FROM public.product_sub_category where product_category_id = :productCategoryId",nativeQuery = true)
+    List<ProductSubCategory> findAllByProductCategoryId(Long productCategoryId); // как писать название переменной
 }

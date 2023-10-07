@@ -9,7 +9,7 @@
 </style>
 
 <body>
-<h2> Product subcategory </h2>
+<h2> Product subcategory from ${productCategory.name} </h2>
 <table>
     <thead>
         <tr>
@@ -34,7 +34,7 @@
 <form action="/admin/add_product_subcategory" method="post" >
     SubCategory name <input type="text" name="name">
     <br>
-    Reference to ProductCategoryId <input type="value" name="productCategoryId">
+    <input type="hidden" name="productCategoryId" value=${productCategory.id}>
     <br>
     <input type="submit" value="add subcategory">
     <br>
