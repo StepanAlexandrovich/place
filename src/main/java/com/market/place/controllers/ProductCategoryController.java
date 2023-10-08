@@ -25,7 +25,7 @@ public class ProductCategoryController {
         List<ProductCategory> productCategories = productCategoryService.getAll();
         model.addAttribute("productCategories",productCategories);
         model.addAttribute("userRole",role);
-        return "products/productCategory";
+        return "products/productCategory";  // поменять камелкейс
     }
 
 }

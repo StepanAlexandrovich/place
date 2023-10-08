@@ -27,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getAllByBasketId(Long basketId) {
+        return productRepository.findByBasketId(basketId);
+    }
+
+    @Override
     public void createProduct(String name,Long productSubCategoryId) {
         ProductSubCategory productSubCategory = productSubCategoryRepository.findById(productSubCategoryId).orElse(new ProductSubCategory());
 

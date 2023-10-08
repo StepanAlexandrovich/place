@@ -9,5 +9,6 @@ public interface ProductService {
     List<Product> getAll();
 
     Product getById(Long id);
+    List<Product> getAllByBasketId(Long basketId);
     void createProduct(String name,Long productSubCategoryId);
 }
