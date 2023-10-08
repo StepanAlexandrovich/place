@@ -22,7 +22,7 @@
        <#list productSubCategories as subCategory>
            <tr>
                <th>${subCategory.name}</th>
-               <th><a href="/products/${subCategory.id}"> Посмотреть список товаров </a></th>
+               <th><a href="products/${subCategory.id}"> Посмотреть список товаров </a></th>
            </tr>
        </#list>
     </tbody>

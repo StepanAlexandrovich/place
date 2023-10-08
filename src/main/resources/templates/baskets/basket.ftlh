@@ -8,7 +8,7 @@
 </style>
 
 <body>
-<h2> Продукты из корзины под именем ${basket.name} </h2>
+<h2> Продукты, которрые вы положили в корзину под именем ${basket.name} </h2>
 <table>
     <thead>
         <tr>
@@ -26,17 +26,6 @@
        </#list>
     </tbody>
 </table>
-<br>
-<br>
-
-<form action="/baskets/add_product_in_basket" method="post" >
-    product id <input type="value" name="productId">
-    <br>
-    <input type="hidden" name="basketId" value=${basket.id}>
-    <br>
-    <input type="submit" value="add product in basket">
-    <br>
-</form>
 
 </body>
 </html>

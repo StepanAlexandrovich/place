@@ -45,7 +45,7 @@
        <#list productCategories as category>
            <tr>
                <th>${category.name}</th>
-               <th><a href="/product_subcategory/${category.id}"> Посмотреть список подкатегорий </a></th>
+               <th><a href="product_subcategory/${category.id}"> Посмотреть список подкатегорий </a></th>
            </tr>
        </#list>
     </tbody>

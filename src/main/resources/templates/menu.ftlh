@@ -12,7 +12,8 @@
 <body>
 <h2> Menu </h2>
 <br>
-<a href="/product_category/">Раздел товаров</a>
+<!--<a href="products/product_category/">Раздел товаров</a>-->
+<a href="menu/products/product_category/">Раздел товаров</a>
 <a href="/baskets/baskets">Операции с корзинами</a>
 
 </body>

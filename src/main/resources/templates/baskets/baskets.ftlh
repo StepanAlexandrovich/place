@@ -35,7 +35,7 @@
 <form action="/baskets/add_basket" method="post" >
     имя корзины <input type="text" name="basketName">
     <br>
-    <input type="submit" value="add product">
+    <input type="submit" value="добавить новую корзину">
     <br>
 </form>
 

@@ -22,20 +22,20 @@ public class AdminController {
     public String addProductCategory(String name){
         productCategoryService.createProductCategory(name);
         log.info("Создана категория: " + name);
-        return "redirect:/product_category/";
+        return "redirect:/menu/products/product_category/";
     }
 
     @PostMapping("/add_product_subcategory")
     public String addProductSubCategory(String name,Long productCategoryId){
         productSubCategoryService.createProductSubCategory(name,productCategoryId);
         log.info("Создана подкатегория: " + name);
-        return "redirect:/product_subcategory/" + productCategoryId;
+        return "redirect:/menu/products/product_category/product_subcategory/" + productCategoryId;
     }
 
     @PostMapping("/add_product")
     public String addProduct(String name,Long productSubCategoryId){
         productService.createProduct(name,productSubCategoryId);
         log.info("Создан продукт: " + name);
-        return "redirect:/products/" + productSubCategoryId;
+        return "redirect:/menu/products/product_category/product_subcategory/products/" + productSubCategoryId;
     }
 }

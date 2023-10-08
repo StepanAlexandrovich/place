@@ -22,7 +22,7 @@
        <#list products as product>
            <tr>
                <th>${product.name}</th>
-               <th><a href="/site"> Посмотреть что то </a></th>
+               <th><a href="/baskets/select_basket/${product.id}"> Добавить в корзину </a></th>
            </tr>
        </#list>
     </tbody>
