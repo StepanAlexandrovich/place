@@ -1,9 +1,7 @@
 package com.market.place.controllers;
 
-import com.market.place.models.Basket;
-import com.market.place.models.Distributor;
-import com.market.place.models.Product;
-import com.market.place.models.User;
+import com.market.place.models.*;
+import com.market.place.repositories.BasketProductRepository;
 import com.market.place.services.impl.BasketServiceImpl;
 import com.market.place.services.impl.DistributorServiceImpl;
 import com.market.place.services.impl.ProductServiceImpl;
@@ -29,35 +27,35 @@ public class StartController {
 
     private final ProductServiceImpl productService;
     private final BasketServiceImpl basketService;
+
+    private final BasketProductRepository basketProductRepository;
     @GetMapping("/start")
     String start(Principal principal){
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
 
-        test2();
+        //test();
+//        BasketProduct basketProduct = new BasketProduct();
+//        basketProduct.setId(new BasketProductKey(1L,7L));
+//        basketProduct.setBasket(basketService.getById(1L));
+//        basketProduct.setProduct(productService.getById(7L));
+//        basketProduct.setProductsCount(1L);
+//        basketProductRepository.save(basketProduct);
+
+
+          //System.out.println(basketProductRepository.getReferenceById(new BasketProductKey(2L, 7L)) );
+
+        //BasketProduct referenceById = basketProductRepository.getReferenceById());
+
+
+
+        BasketProduct referenceById = basketProductRepository.findById(new BasketProductKey(1L,7L)).orElse(null);
+
+
+
+        System.out.println(basketProductRepository.getReferenceById(new BasketProductKey(1L,7L)).getProduct().getName());
+        System.out.println(basketProductRepository.getReferenceById(new BasketProductKey(1L,7L)).getBasket().getName());
 
         return "start";
-    }
-
-    private void test2(){
-        //basketService.createBasket("Basket2");
-
-//        basketService.addProduct(7L,1L);
-//        basketService.addProduct(9L,1L);
-//        basketService.addProduct(7L,2L);
-//        basketService.addProduct(9L,2L);
-//        basketService.addProduct(10L,2L);
-
-
-        List<Product> allByBasketId = productService.getAllByBasketId(1L);
-        for (Product product : allByBasketId) {
-            System.out.println(product.getName());
-        }
-        System.out.println("----------------");
-        List<Product> allByBasketId1 = productService.getAllByBasketId(2L);
-        for (Product product : allByBasketId1) {
-            System.out.println(product.getName());
-        }
-        System.out.println("----------------");
     }
 
     private void test(){

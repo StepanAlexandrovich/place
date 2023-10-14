@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +30,10 @@ public class Product {
     private List<Price> prices = new ArrayList<>();
     @OneToMany(mappedBy = "product")
     private List<Quantity> quantities = new ArrayList<>();
-    @ManyToMany(mappedBy = "products",fetch = FetchType.LAZY)
-    Set<Basket> baskets;
+
+    @OneToMany(mappedBy = "product")
+    Set<BasketProduct> basketProducts;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    List<Image> images = new ArrayList<>();
 }

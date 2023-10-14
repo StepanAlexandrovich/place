@@ -1,8 +1,7 @@
 package com.market.place.services.impl;
 
-import com.market.place.models.Basket;
-import com.market.place.models.Product;
-import com.market.place.models.User;
+import com.market.place.models.*;
+import com.market.place.repositories.BasketProductRepository;
 import com.market.place.repositories.BasketRepository;
 import com.market.place.repositories.ProductRepository;
 import com.market.place.services.BasketService;
@@ -16,6 +15,8 @@ import java.util.List;
 public class BasketServiceImpl implements BasketService {
     private final BasketRepository basketRepository;
     private final ProductRepository productRepository;
+
+    private final BasketProductRepository basketProductRepository;
 
     @Override
     public List<Basket> getAll() {
@@ -49,9 +50,23 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public void addProduct(Long productId, Long basketId) {
-        Basket basket = basketRepository.findById(basketId).orElse(new Basket());
-        basket.getProducts().add(productRepository.findById(productId).orElse(new Product()));
-        basketRepository.save(basket);
+        BasketProductKey key = new BasketProductKey(basketId, productId);
+        BasketProduct basketProduct = basketProductRepository.findById(key).orElse(null);
+        if(basketProduct == null){
+
+            Basket basket = basketRepository.findById(key.getBasketId()).orElse(null);
+            Product product = productRepository.findById(key.getProductId()).orElse(null);
+            if(basket!=null && product!=null){
+                basketProduct = new BasketProduct(key,basket,product,1L);
+            }else{
+                System.out.println("Продукт или карзина с такими id не найдены");
+            }
+        }else{
+            Long productsCount = basketProduct.getProductsCount();
+            basketProduct.setProductsCount(productsCount + 1);
+        }
+
+        basketProductRepository.save(basketProduct);
     }
 
 

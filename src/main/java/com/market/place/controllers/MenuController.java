@@ -11,8 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 @RequiredArgsConstructor
 public class MenuController {
-    @GetMapping("/menu")
+    @GetMapping("/user/menu")
     String menu(){
-        return "menu";
+        return "user/menu";
+    }
+    @GetMapping("/admin/menu")
+    String adminMenu(){
+        return "admin/menu";
+    }
+    @GetMapping("/distributor/menu")
+    String distributorMenu(){
+        return "distributor/menu";
     }
 }

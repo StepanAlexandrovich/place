@@ -1,11 +1,14 @@
 package com.market.place.controllers;
 
 import com.market.place.models.Basket;
+import com.market.place.models.BasketProduct;
 import com.market.place.models.Product;
 import com.market.place.models.User;
+import com.market.place.repositories.BasketProductRepository;
 import com.market.place.services.impl.BasketServiceImpl;
 import com.market.place.services.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +23,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/baskets")
 @RequiredArgsConstructor
+@Slf4j
 public class BasketController {
     private final BasketServiceImpl basketService;
     private final ProductServiceImpl productService;
+    private final BasketProductRepository basketProductRepository;
 
     @GetMapping("/baskets")
     String baskets(Model model, Principal principal){
@@ -36,7 +41,6 @@ public class BasketController {
     @GetMapping("/basket/{basketId}")
     String basket(@PathVariable Long basketId,Model model){
         Basket basket = basketService.getById(basketId);
-        model.addAttribute("products",basket.getProducts());
         model.addAttribute("basket",basket);
         return "baskets/basket";
     }
@@ -63,7 +67,6 @@ public class BasketController {
     public String addBasket(String basketName,Principal principal){
         User user = ((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
         basketService.createBasket(basketName,user);
-        //log.info("Создана корзина: " + name);
         return "redirect:/baskets/baskets";
     }
 }

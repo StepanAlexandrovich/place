@@ -13,15 +13,15 @@
     <thead>
         <tr>
             <th>Список товаров</th>
-            <th>Что то</th>
+            <th>Количество</th>
         </tr>
     </thead>
 
     <tbody>
-       <#list products as product>
+       <#list basket.basketProducts as bp>
            <tr>
-               <th>${product.name}</th>
-               <th><a href="/site"> Посмотреть что то </a></th>
+               <th>${bp.product.name}</th>
+               <th>${bp.productsCount}</th>
            </tr>
        </#list>
     </tbody>

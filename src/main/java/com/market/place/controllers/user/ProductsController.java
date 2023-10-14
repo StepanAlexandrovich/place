@@ -1,8 +1,10 @@
-package com.market.place.controllers;
+package com.market.place.controllers.user;
 
+import com.market.place.models.Product;
 import com.market.place.models.ProductCategory;
 import com.market.place.models.ProductSubCategory;
 import com.market.place.services.impl.ProductCategoryServiceImpl;
+import com.market.place.services.impl.ProductServiceImpl;
 import com.market.place.services.impl.ProductSubCategoryServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,22 +18,23 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("menu/products")
+@RequestMapping("user/menu/product_category")
 @RequiredArgsConstructor
 public class ProductsController {
     private final ProductCategoryServiceImpl productCategoryService;
     private final ProductSubCategoryServiceImpl productSubCategoryService;
-    @GetMapping("/product_category")
+    private final ProductServiceImpl productService;
+    @GetMapping("")
     public String getAllCategory(Model model, Principal principal){
         String role = ((UsernamePasswordAuthenticationToken) principal).getAuthorities().stream().toList().get(0).getAuthority();
 
         List<ProductCategory> productCategories = productCategoryService.getAll();
         model.addAttribute("productCategories",productCategories);
         model.addAttribute("userRole",role);
-        return "products/product_category";
+        return "user/products_folder/product_category";
     }
-    @GetMapping(value = "/product_category/product_subcategory/{productCategoryId}")
-    public String getAllSubCategories(@PathVariable Long productCategoryId,Model model, Principal principal){
+    @GetMapping(value = "/product_subcategory/{productCategoryId}")
+    public String getSubCategoriesByProductCategoryId(@PathVariable Long productCategoryId,Model model, Principal principal){
         String role = ((UsernamePasswordAuthenticationToken) principal).getAuthorities().stream().toList().get(0).getAuthority();
         ProductCategory productCategory = productCategoryService.getById(productCategoryId);
 
@@ -39,19 +42,20 @@ public class ProductsController {
         model.addAttribute("productCategory",productCategory);
         model.addAttribute("userRole",role);
 
-        return "products/productSubCategory";
+        return "user/products_folder/product_sub_category";
     }
-    @GetMapping(value = "/product_category/product_subcategory/products/{productSubCategoryId}")
-    public String getAllProducts(@PathVariable Long productSubCategoryId, Model model, Principal principal){  // изм назв
-        String role = ((UsernamePasswordAuthenticationToken) principal).getAuthorities().stream().toList().get(0).getAuthority();
+
+    @GetMapping("/product_sub_category/products/{productSubCategoryId}")
+    public String getProductsByProductSubCategoryId(@PathVariable Long productSubCategoryId, Model model){
         ProductSubCategory productSubCategory = productSubCategoryService.getById(productSubCategoryId);
-
-        model.addAttribute("products",productSubCategory.getProducts());
         model.addAttribute("productSubCategory",productSubCategory);
-        model.addAttribute("userRole",role);
-
-        return "products/products";
+        return "user/products_folder/products";
     }
-
+    @GetMapping("/product_sub_category/products/product/{productId}")
+    public String getProductById(@PathVariable Long productId, Model model){
+        Product product = productService.getById(productId);
+        model.addAttribute("product",product);
+        return "user/products_folder/product";
+    }
 
 }
