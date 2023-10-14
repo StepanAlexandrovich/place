@@ -13,6 +13,7 @@
 <h2> Menu </h2>
 <br>
 <a href="/user/menu/product_category">Раздел товаров</a>
+<br>
 <a href="/baskets/baskets">Операции с корзинами</a>
 
 </body>

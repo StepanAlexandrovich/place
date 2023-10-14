@@ -13,6 +13,8 @@
 <h2>Вы вошли как администратор</h2>
 <br>
 <a href="/user/menu">тест</a>
+<br>
+<a href="/admin/menu/product_category">Раздел товаров</a>
 
 </body>
 </html>

@@ -16,7 +16,6 @@
         <th>Изображение</th>
         <th>Наименование товара</th>
         <th>Подорбнее о товаре</th>
-        <th>-------------------</th>
     </tr>
     </thead>
 
@@ -25,8 +24,7 @@
     <tr>
         <th> <img src="/image/${product.images[0].id}" width = "100px" height = "100px"> </th>
         <th>${product.name}</th>
-        <th><a href="/user/menu/product_category/product_sub_category/products/product/${product.id}">содержимое</a></th>
-        <th><a href="/baskets/select_basket/${product.id}">добавить в корзину</a></th>
+        <th><a href="/admin/menu/product_category/product_sub_category/products/product/${product.id}">содержимое</a></th>
     </tr>
     </#list>
     </tbody>

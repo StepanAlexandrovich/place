@@ -13,5 +13,7 @@
 <h2>Вы вошли как дистрибьютор</h2>
 <br>
 <a href="/user/menu">тест</a>
+<br>
+<a href="/distributor/menu/product_category">Раздел товаров</a>
 </body>
 </html>

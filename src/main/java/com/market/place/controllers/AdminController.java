@@ -31,34 +31,18 @@ public class AdminController {
 
     private final ProductCategoryValidation productCategoryValidation;
 
-    @PostMapping("/add_product_category")
-    public String addProductCategory(@ModelAttribute("productCategory") ProductCategory productCategory, BindingResult bindingResult){
-        productCategoryValidation.validate(productCategory,bindingResult);
-        if(bindingResult.hasErrors()){
-            return "redirect:/menu/products/product_category/"; // сделать сообщение на сайте в поле ввода
-        }
-        productCategoryService.createProductCategory(productCategory.getName());
-        log.info("Создана категория: " + productCategory.getName());
-        return "redirect:/menu/products/product_category/";
-    }
 
-    @PostMapping("/add_product_subcategory")
-    public String addProductSubCategory(String name,Long productCategoryId){
-        productSubCategoryService.createProductSubCategory(name,productCategoryId);
-        log.info("Создана подкатегория: " + name);
-        return "redirect:/menu/products/product_category/product_subcategory/" + productCategoryId;
-    }
 
-    @PostMapping("/add_product")
-    public String addProduct(String name, Long productSubCategoryId, @RequestParam MultipartFile file1,@RequestParam MultipartFile file2,@RequestParam MultipartFile file3){  // переделать
-        List<MultipartFile> files = new ArrayList<>();
-        files.add(file1);
-        files.add(file2);
-        files.add(file3);
-
-        productService.createProduct(name,productSubCategoryId,files);
-        log.info("Создан продукт: " + name);
-
-        return "redirect:/menu/products/product_category/product_subcategory/products/" + productSubCategoryId; //перед
-    }
+//    @PostMapping("/add_product")
+//    public String addProduct(String name, Long productSubCategoryId, @RequestParam MultipartFile file1,@RequestParam MultipartFile file2,@RequestParam MultipartFile file3){  // переделать
+//        List<MultipartFile> files = new ArrayList<>();
+//        files.add(file1);
+//        files.add(file2);
+//        files.add(file3);
+//
+//        productService.createProduct(name,productSubCategoryId,files);
+//        log.info("Создан продукт: " + name);
+//
+//        return "redirect:/menu/products/product_category/product_subcategory/products/" + productSubCategoryId; //перед
+//    }
 }
