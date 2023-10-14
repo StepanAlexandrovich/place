@@ -17,9 +17,6 @@ import org.springframework.stereotype.Component;
 public class UserCreateDtoToUserTransformer<T extends User> extends Transformer<User, UserCreateDto>{
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
-//
-//    private final T user;
- //   private GetUser<User> getUser = () -> new User();
 
     @Override
     public User transform(UserCreateDto userCreateDto) {
