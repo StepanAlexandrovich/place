@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Distributor extends User{
     public Distributor(User user) {
-        super(user.getId(), user.getLogin(), user.getPassword(), user.getBan(),user.getUserRole());
+        super(user.getId(), user.getLogin(), user.getPassword(), user.getBan(),user.getUserRole(),user.getBaskets());
     }
 
     @Column(name = "name")

@@ -1,6 +1,8 @@
 package com.market.place.controllers;
 
 import com.market.place.dto.UserCreateDto;
+import com.market.place.services.UserService;
+import com.market.place.validation.UserValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +17,23 @@ import javax.validation.Valid;
 @RequestMapping
 @RequiredArgsConstructor
 public class DistributorController {
-//    @GetMapping("/registration")
-//    public String registration(Model model){
-//        model.addAttribute("userCreateDto",new UserCreateDto());
-//        return "registration";
-//    }
-//
-//    @PostMapping("/registration")
-//    public String registrationUser(@Valid UserCreateDto userCreateDto, BindingResult bindingResult, Model model){
-//        userValidation.validate(userCreateDto,bindingResult);
-//        if(!bindingResult.hasErrors()){
-//            model.addAttribute("noErrors",true);
-//            userService.createUser(userCreateDto);
-//            return "login";
-//        }
-//        model.addAttribute("userCreateDto",userCreateDto);
-//        return "registration";
-//    }
+    private final UserValidation userValidation;
+    private final UserService userService;
+    @GetMapping("/registration")
+    public String registration(Model model){
+        model.addAttribute("userCreateDto",new UserCreateDto());
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String registrationUser(@Valid UserCreateDto userCreateDto, BindingResult bindingResult, Model model){
+        userValidation.validate(userCreateDto,bindingResult);
+        if(!bindingResult.hasErrors()){
+            model.addAttribute("noErrors",true);
+            userService.createUser(userCreateDto);
+            return "login";
+        }
+        model.addAttribute("userCreateDto",userCreateDto);
+        return "registration";
+    }
 }

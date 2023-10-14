@@ -1,8 +1,10 @@
 package com.market.place.controllers;
 
-import com.market.place.models.Distributor;
-import com.market.place.models.User;
+import com.market.place.models.*;
+import com.market.place.repositories.BasketProductRepository;
+import com.market.place.services.impl.BasketServiceImpl;
 import com.market.place.services.impl.DistributorServiceImpl;
+import com.market.place.services.impl.ProductServiceImpl;
 import com.market.place.services.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,11 +24,36 @@ public class StartController {
     private final JdbcTemplate jdbcTemplate;
     private final DistributorServiceImpl distributorService;
     private final UserServiceImpl userService;
+
+    private final ProductServiceImpl productService;
+    private final BasketServiceImpl basketService;
+
+    private final BasketProductRepository basketProductRepository;
     @GetMapping("/start")
     String start(Principal principal){
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
 
-        test();
+        //test();
+//        BasketProduct basketProduct = new BasketProduct();
+//        basketProduct.setId(new BasketProductKey(1L,7L));
+//        basketProduct.setBasket(basketService.getById(1L));
+//        basketProduct.setProduct(productService.getById(7L));
+//        basketProduct.setProductsCount(1L);
+//        basketProductRepository.save(basketProduct);
+
+
+          //System.out.println(basketProductRepository.getReferenceById(new BasketProductKey(2L, 7L)) );
+
+        //BasketProduct referenceById = basketProductRepository.getReferenceById());
+
+
+
+        BasketProduct referenceById = basketProductRepository.findById(new BasketProductKey(1L,7L)).orElse(null);
+
+
+
+        System.out.println(basketProductRepository.getReferenceById(new BasketProductKey(1L,7L)).getProduct().getName());
+        System.out.println(basketProductRepository.getReferenceById(new BasketProductKey(1L,7L)).getBasket().getName());
 
         return "start";
     }
