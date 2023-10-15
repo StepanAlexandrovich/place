@@ -20,6 +20,8 @@ public class DistributorServiceImpl implements DistributorService {
 
     @Override
     public void createDistributor(DistributorCreateDto distributorCreateDto) {
+
+
         Distributor distributor = distributorCreateDtoToDistributorTransformer.transform(distributorCreateDto);
         distributor.setUserRole(userRoleRepository.findByRole("ROLE_DISTRIBUTOR"));
         distributorRepository.save(distributor);
