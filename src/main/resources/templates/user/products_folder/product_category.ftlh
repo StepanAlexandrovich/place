@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <title>Product category</title>
-<!--    <link rel="stylesheet" href="/static/css/style.css">-->
-
-    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
-
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>

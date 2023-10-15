@@ -32,16 +32,6 @@ public class DistributorProductsController {
         model.addAttribute("productCategories",productCategories);
         return "distributor/products_folder/product_category";
     }
-//    @PostMapping("/add_product_category")
-//    public String addProductCategory(@ModelAttribute("productCategory") ProductCategory productCategory, BindingResult bindingResult,Model model){
-//        productCategoryValidation.validate(productCategory,bindingResult);
-//        if(bindingResult.hasErrors()){
-//            return "redirect:/menu/products/product_category/"; // сделать сообщение на сайте в поле ввода
-//        }
-//        productCategoryService.createProductCategory(productCategory.getName());
-//
-//        return getAllCategory(model);
-//    }
 
     @GetMapping("/product_sub_category/{productCategoryId}")
     public String getProductSubCategoryByProductCategoryId(@PathVariable Long productCategoryId, Model model){
@@ -49,16 +39,6 @@ public class DistributorProductsController {
         model.addAttribute("productCategory",productCategory);
         return "distributor/products_folder/product_sub_category";
     }
-
-//    @PostMapping("/product_sub_category/add_product_sub_category")
-//    public String addProductSubCategory(String name,Long productCategoryId,Model model){
-//        productSubCategoryService.createProductSubCategory(name,productCategoryId);  // сделать валидацию
-//
-//        return getProductSubCategoryByProductCategoryId(productCategoryId,model);
-//    }
-
-
-
 
     @GetMapping("/product_sub_category/products/{productSubCategoryId}")
     public String getProductsByProductSubCategoryId(@PathVariable Long productSubCategoryId, Model model){
@@ -87,8 +67,6 @@ public class DistributorProductsController {
         files.add(file3);
 
         productService.createProduct(name,productSubCategoryId,files);
-
-        //return "redirect:/menu/products/product_category/product_subcategory/products/" + productSubCategoryId; //перед
 
         return getProductsByProductSubCategoryId(productSubCategoryId,model);
     }

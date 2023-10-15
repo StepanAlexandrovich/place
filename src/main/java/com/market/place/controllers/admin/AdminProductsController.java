@@ -8,14 +8,10 @@ import com.market.place.services.impl.ProductServiceImpl;
 import com.market.place.services.impl.ProductSubCategoryServiceImpl;
 import com.market.place.validation.ProductCategoryValidation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("admin/menu/product_category")
@@ -28,20 +24,22 @@ public class AdminProductsController {
     
     @GetMapping("")
     public String getAllCategory(Model model){
-        List<ProductCategory> productCategories = productCategoryService.getAll();
-        model.addAttribute("productCategories",productCategories);
+        model.addAttribute("productCategories",productCategoryService.getAll());
+        model.addAttribute("productCategory",new ProductCategory());
         return "admin/products_folder/product_category";
+
     }
     @PostMapping("/add_product_category")
-    public String addProductCategory(@ModelAttribute("productCategory") ProductCategory productCategory, BindingResult bindingResult,Model model){
+    public String addProductCategory(@ModelAttribute("productCategory") ProductCategory productCategory, BindingResult bindingResult, Model model){
         productCategoryValidation.validate(productCategory,bindingResult);
         if(bindingResult.hasErrors()){
-            return "redirect:/menu/products/product_category/"; // сделать сообщение на сайте в поле ввода
+            model.addAttribute("productCategories",productCategoryService.getAll());
+            return "admin/products_folder/product_category";
         }
         productCategoryService.createProductCategory(productCategory.getName());
-
         return getAllCategory(model);
     }
+
     //--------------------------------------------
     @GetMapping("/product_sub_category/{productCategoryId}")
     public String getProductSubCategoryByProductCategoryId(@PathVariable Long productCategoryId, Model model){

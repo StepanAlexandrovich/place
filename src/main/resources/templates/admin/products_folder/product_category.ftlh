@@ -1,3 +1,5 @@
+<#import "/spring.ftl" as spring />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +12,26 @@
 </head>
 
 <body>
+
+<#if productCategory?? && noErrors??>
+Name : ${productCategory.name}
+<br>
+<#else>
+<form action="/admin/menu/product_category/add_product_category" method="post" >
+
+    Name
+    <@spring.formInput "productCategory.name" />
+    <@spring.showErrors "<br>" />
+
+    <br>
+    <input type="submit" value="добавить категорию">
+    <br>
+</form>
+</#if>
+
+<br>
+<br>
+
 <h2> Product category </h2>
 <table>
     <thead>
@@ -31,12 +53,6 @@
 <br>
 <br>
 
-<form action="/admin/menu/product_category/add_product_category" method="post" >
-    Category name <input type="text" name="name">
-    <br>
-    <input type="submit" value="add category">
-    <br>
-</form>
-
 </body>
+
 </html>
