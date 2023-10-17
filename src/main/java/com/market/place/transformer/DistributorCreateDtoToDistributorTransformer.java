@@ -14,10 +14,10 @@ public class DistributorCreateDtoToDistributorTransformer extends Transformer<Di
     public Distributor transform(DistributorCreateDto distributorCreateDto) {
         Distributor distributor = new Distributor(userCreateDtoToUserTransformer.transform(distributorCreateDto));
         distributor.setName(distributorCreateDto.getName());
+
         distributor.setBan(true);
+
         return distributor;
-
     }
-
 
 }

@@ -34,6 +34,9 @@ public class User implements UserDetails {
     @ManyToOne
     private UserRole userRole;
 
+    @OneToMany(mappedBy = "user")
+    private List<Basket> baskets;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<UserRole> userRoles = new ArrayList<>();
