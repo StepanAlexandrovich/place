@@ -1,10 +1,7 @@
-package com.market.place.controllers;
+package com.market.place.controllers.user;
 
 import com.market.place.models.Basket;
-import com.market.place.models.BasketProduct;
-import com.market.place.models.Product;
 import com.market.place.models.User;
-import com.market.place.repositories.BasketProductRepository;
 import com.market.place.services.impl.BasketServiceImpl;
 import com.market.place.services.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,57 +13,54 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/baskets")
+@RequestMapping("user/menu/baskets")
 @RequiredArgsConstructor
 @Slf4j
 public class BasketController {
     private final BasketServiceImpl basketService;
     private final ProductServiceImpl productService;
-    private final BasketProductRepository basketProductRepository;
 
-    @GetMapping("/baskets")
+    //// baskets -----------------------------
+    @GetMapping("")
     String baskets(Model model, Principal principal){
         User user = ((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
 
         List<Basket> baskets = basketService.getAllByUserId(user.getId());
         model.addAttribute("baskets",baskets);
-        return "baskets/baskets";
+        return "user/baskets_folder/baskets";
     }
-
     @GetMapping("/basket/{basketId}")
     String basket(@PathVariable Long basketId,Model model){
         Basket basket = basketService.getById(basketId);
         model.addAttribute("basket",basket);
-        return "baskets/basket";
+        return "user/baskets_folder/basket";
+    }
+    @PostMapping("/add_basket")
+    public String addBasket(String basketName,Model model,Principal principal){
+        User user = ((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
+        basketService.createBasket(basketName,user);
+        return baskets(model,principal);
     }
 
-    @GetMapping(value = "/select_basket/{productId}")
+    //// add product in basket --------------------------------------
+    // step 1 -> select product
+    @GetMapping(value = "/add_product_in_basket/select_product/{productId}")
     String addProductInBasket(@PathVariable Long productId, Model model,Principal principal){
         User user = ((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
 
-        List<Basket> baskets = basketService.getAllByUserId(user.getId());
-        Product product = productService.getById(productId);
-
-        model.addAttribute("baskets",baskets);
-        model.addAttribute("product",product);
-        return "baskets/select_basket";
+        model.addAttribute("baskets",basketService.getAllByUserId(user.getId()));
+        model.addAttribute("product",productService.getById(productId));
+        return "user/baskets_folder/select_basket_add_product";
     }
-
-    @GetMapping("/add_product_in_basket/{productId}/{basketId}")
-    String addProductInBasket(@PathVariable Long productId,@PathVariable Long basketId){
+    // step 1 -> select basket
+    @GetMapping("/add_product_in_basket/select_basket/{productId}/{basketId}")
+    String addProductInBasket(@PathVariable Long productId,@PathVariable Long basketId,Model model){
         basketService.addProduct(productId,basketId);
-        return "redirect:/baskets/basket/" + basketId;
+        return basket(basketId,model);
     }
 
-    @PostMapping("/add_basket")
-    public String addBasket(String basketName,Principal principal){
-        User user = ((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
-        basketService.createBasket(basketName,user);
-        return "redirect:/baskets/baskets";
-    }
 }

@@ -5,27 +5,28 @@
 <head>
 
     <title>Product category</title>
-    <link rel="stylesheet" href="/css/style.css">
+<!--    <link rel="stylesheet" href="/static/css/style.css">-->
+
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
 
 </head>
 
 <body>
 
-<#if productCategory?? && noErrors??>
-Name : ${productCategory.name}
-<br>
-<#else>
+
+
+<form:errors path = "productCategory.*"></form:errors>
+
 <form action="/admin/menu/product_category/add_product_category" method="post" >
-
-    Name
-    <@spring.formInput "productCategory.name" />
-    <@spring.showErrors "<br>" />
-
+    Category name <input type="text" name="name">
     <br>
     <input type="submit" value="добавить категорию">
     <br>
 </form>
-</#if>
+
+
+
+
 
 <br>
 <br>

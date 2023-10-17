@@ -1,11 +1,8 @@
 package com.market.place.transformer;
 
-import com.market.place.NewClass;
 import com.market.place.dto.UserCreateDto;
 import com.market.place.models.User;
-import com.market.place.models.UserRole;
 import com.market.place.repositories.UserRoleRepository;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;

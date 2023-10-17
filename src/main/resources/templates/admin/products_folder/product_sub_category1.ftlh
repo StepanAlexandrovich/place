@@ -1,5 +1,3 @@
-<#import "/spring.ftl" as spring />
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,28 +8,6 @@
 </style>
 
 <body>
-
-<#if productSubCategory?? && noErrors??>
-Name : ${productSubCategory.name}
-<br>
-<#else>
-<form action="/admin/menu/product_category/product_sub_category/add_product_sub_category" method="post" >
-
-    Name
-    <@spring.formInput "productSubCategory.name" />
-    <@spring.showErrors "<br>" />
-
-    <br>
-    <input type="hidden" name="productCategoryId" value=${productCategory.id}>
-    <br>
-    <input type="submit" value="добавить подкатегорию">
-    <br>
-</form>
-</#if>
-
-<br>
-<br>
-
 <h2> список подкатегорий из категории ${productCategory.name} </h2>
 <table>
     <thead>
@@ -50,6 +26,17 @@ Name : ${productSubCategory.name}
        </#list>
     </tbody>
 </table>
+<br>
+<br>
+
+<form action="/admin/menu/product_category/product_sub_category/add_product_sub_category" method="post" >
+    SubCategory name <input type="text" name="name">
+    <br>
+    <input type="hidden" name="productCategoryId" value=${productCategory.id}>
+    <br>
+    <input type="submit" value="add subcategory">
+    <br>
+</form>
 
 </body>
 </html>

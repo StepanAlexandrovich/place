@@ -23,7 +23,7 @@
        <#list baskets as basket>
            <tr>
                <th>${basket.name}</th>
-               <th><a href="/baskets/basket/${basket.id}"> Посмотреть содержимое корзины </a></th>
+               <th><a href="/user/menu/baskets/basket/${basket.id}"> Посмотреть содержимое корзины </a></th>
            </tr>
        </#list>
     </tbody>
@@ -32,7 +32,7 @@
 <br>
 <br>
 
-<form action="/baskets/add_basket" method="post" >
+<form action="/user/menu/baskets/add_basket" method="post" >
     имя корзины <input type="text" name="basketName">
     <br>
     <input type="submit" value="добавить новую корзину">

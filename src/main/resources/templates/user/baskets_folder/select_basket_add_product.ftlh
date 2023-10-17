@@ -22,7 +22,7 @@
     <#list baskets as basket>
     <tr>
         <th>${basket.name}</th>
-        <th><a href="/baskets/add_product_in_basket/${product.id}/${basket.id}"> Добавить выбранный продукт в эту карзину </a></th>
+        <th><a href="/user/menu/baskets/add_product_in_basket/select_basket/${product.id}/${basket.id}"> Добавить выбранный продукт в эту карзину </a></th>
     </tr>
     </#list>
     </tbody>
